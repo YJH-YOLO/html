@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>报警</title>
+  <link href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jqueryui/style.css">
+ <script>
+     $(function() {
+    $( "#datepicker1" ).datepicker({
+      showOtherMonths: true,
+      selectOtherMonths: true
+    });
+    $( "#datepicker2" ).datepicker({
+      showOtherMonths: true,
+      selectOtherMonths: true
+    });
+  });
+    </script>
+  <style>
+     .bj {
+      display: flex;
+      align-items: center; /* 让内容在交叉轴上居中对齐 */
+    }
+    .bj p {
+      margin: 30px 20px; /* 添加上下间隔为 10px，左右间隔为 20px */
+    }
+    body {
+        margin: 0;
+        background-image:url('background.jpg');
+        background-size: cover;
+	      background-repeat:no-repeat; 
+      }
+    /* 下拉栏样式 */
+    #deviceFilter{
+      padding: 8px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      background-color:#3399FF;
+    
+    }
+    #alarmTypeFilter{
+      padding: 8px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      background-color:#3399FF;
+    }
+    #alarmLevelFilter{
+      padding: 8px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      background-color:#3399FF;
+    }
+    #situationFilter{
+      padding: 8px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      background-color:#3399FF;
+    }
+   .filters-container {
+    display: flex;
+    justify-content: space-between; /* 将项目分布在两端 */
+    align-items: center; /* 在交叉轴上居中对齐 */
+    }
+.filters-container > * {
+   margin-right: 10px; /* 调整内部元素之间的间距 */
+  }
+
+
+    .filters-container button {
+    margin-right: 100px; /* 设置按钮右侧间距 */
+      }
+    /* 下拉选项样式 */
+    #filter option {
+      background-color:#3399FF;
+      color: #333;
+    }
+    table, td, th
+    {
+	  border:1px solid grey;
+      width: 500px;
+      height:40px;
+	color:white
+    }
+      table {
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
+            height:600px;
+        }
+        th {
+      text-align: center; /* 让表头文本居中对齐 */
+      }
+      
+     button {
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-3">         
+    <div class="dropdown ">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+        光伏场站
+        </button>
+        <ul class="dropdown-menu">
+         <li><a class="dropdown-item" href="#">1号光伏场站</a></li>
+		    <li><hr class="dropdown-divider"></li>
+         <li><a class="dropdown-item" href="#">2号光伏场站</a></li>
+		    <li><hr class="dropdown-divider"></li>
+         <li><a class="dropdown-item" href="#">3号光伏场站</a></li>
+            <li><hr class="dropdown-divider"></li>
+         <li><a class="dropdown-item disabled" href="#">测试光伏场站</a></li>
+         </ul>
+    </div>
+   </div>
+   <div class="bj">
+    <p class="text-muted">实时报警</p>
+    <p class="text-muted">历史报警</p>
+    </div>
+
+
+  <div class="filters-container">
+  <label for="deviceFilter" style="color: white;">设备编号</label>
+  <select id="deviceFilter">
+    <option value="all">全部</option>
+    <option value="1号设备">1号设备</option>
+    <option value="2号设备">2号设备</option>
+    <option value="3号设备">3号设备</option>
+    <option value="4号设备">4号设备</option>
+    <option value="5号设备">5号设备</option>
+    <option value="6号设备">6号设备</option>
+  </select>
+
+  <label for="alarmTypeFilter" style="color: white;">报警类别</label>
+  <select id="alarmTypeFilter">
+    <option value="all">全部</option>
+    <option value="a">a类报警</option>
+    <option value="b">b类报警</option>
+    <option value="c">c类报警</option>
+  </select>
+
+  <label for="alarmLevelFilter" style="color: white;">报警级别</label>
+  <select id="alarmLevelFilter">
+    <option value="all">全部</option>
+    <option value="1">1级报警</option>
+    <option value="2">2级报警</option>
+    <option value="3">3级报警</option>
+  </select>
+
+  <label for="situationFilter" style="color: white;">操作</label>
+  <select id="situationFilter">
+    <option value="all">全部</option>
+    <option value="已忽略">已忽略</option>
+    <option value="已恢复">已恢复</option>
+    <option value="未恢复">未恢复</option>
+  </select>
+  <p style="color: white;">开始时间：<input type="text" id="datepicker1"></p>
+    <p style="color: white;">结束时间：<input type="text" id="datepicker2"></p>
+  <button type="button">查询</button>
+</div>
+
+  <table id="dataTable" border="1" width="600" style="border:0px;b">
+    <thead>
+      <tr>
+        <th >设备编号</th>
+        <th>报警说明</th>
+        <th>报警类别</th>
+        <th>报警级别</th>
+        <th>报警时间</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td align="center">1号设备</td>
+        <td align="center">设备异常</td>
+        <td align="center">a</td>
+        <td align="center">1</td>
+        <td align="center">1小时内</td>
+        <td align="center">已恢复</td>
+        
+      </tr>
+      <tr>
+        <td align="center">2号设备</td>
+        <td align="center">设备异常</td>
+        <td align="center">b</td>
+        <td align="center">2</td>
+        <td align="center">3小时内</td>
+        <td align="center">未恢复</td>
+      </tr>
+      <tr>
+        <td align="center">3号设备</td>
+        <td align="center">设备异常</td>
+        <td align="center">c</td>
+        <td align="center">3</td>
+        <td align="center">6小时内</td>
+        <td align="center">已忽略</td>
+      </tr>
+      <tr>
+        <td align="center">4号设备</td>
+        <td align="center">设备异常</td>
+        <td align="center">a</td>
+        <td align="center">3</td>
+        <td align="center">6小时内</td>
+        <td align="center">已恢复</td>
+      </tr>
+       <tr>
+        <td align="center">5号设备</td>
+        <td align="center">设备异常</td>
+        <td align="center">c</td>
+        <td align="center">2</td>
+        <td align="center">3小时内</td>
+        <td align="center">未恢复</td>
+      </tr>
+        <tr>
+        <td align="center">6号设备</td>
+        <td align="center">设备异常</td>
+        <td align="center">b</td>
+        <td align="center">1</td>
+        <td align="center">1小时内</td>
+        <td align="center">已忽略</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  // 获取下拉选择框元素
+  var deviceFilter = document.getElementById("deviceFilter");
+  var alarmTypeFilter = document.getElementById("alarmTypeFilter");
+  var alarmLevelFilter = document.getElementById("alarmLevelFilter");
+  var situationFilter = document.getElementById("situationFilter");
+
+  // 获取数据表格的所有行
+  var tableRows = document.querySelectorAll("#dataTable tbody tr");
+
+  // 添加下拉选择框的change事件监听器
+  deviceFilter.addEventListener("change", filterTable);
+  alarmTypeFilter.addEventListener("change", filterTable);
+  alarmLevelFilter.addEventListener("change", filterTable);
+  situationFilter.addEventListener("change", filterTable);
+
+  // 定义筛选函数
+  function filterTable() {
+    var deviceValue = deviceFilter.value;
+    var alarmTypeValue = alarmTypeFilter.value;
+    var alarmLevelValue = alarmLevelFilter.value;
+    var situationValue = situationFilter.value;
+
+    // 遍历表格行，根据选择框的值进行筛选
+    tableRows.forEach(function(row) {
+      var deviceColumn = row.cells[0].textContent; // 第一列数据
+      var alarmTypeColumn = row.cells[2].textContent; // 第三列数据
+      var alarmLevelColumn = row.cells[3].textContent; // 第四列数据
+      var situationColumn = row.cells[5].textContent; // 第六列数据
+
+      if ((deviceValue === "all" || deviceColumn === deviceValue) &&
+          (alarmTypeValue === "all" || alarmTypeColumn === alarmTypeValue) &&
+          (alarmLevelValue === "all" || alarmLevelColumn === alarmLevelValue) &&
+          (situationValue === "all" || situationColumn === situationValue)) {
+        // 显示符合条件的行
+        row.style.display = "";
+      } else {
+        // 隐藏不符合条件的行
+        row.style.display = "none";
+      }
+    });
+  }
+});
+    
+  </script>
+</body>
+</html>
